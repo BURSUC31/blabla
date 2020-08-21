@@ -9,23 +9,21 @@ weatherForm.addEventListener("submit", (e) => {
 
   messageTwo.textContent = "";
 
-  fetch("http://localhost:3000/weather?address=" + location + "").then(
-    (response) => {
-      response.json().then((data) => {
-        if (data.error) {
-          messageOne.textContent = data.error;
-        } else {
-          messageOne.textContent = data.location;
+  fetch("/weather?address=" + location + "").then((response) => {
+    response.json().then((data) => {
+      if (data.error) {
+        messageOne.textContent = data.error;
+      } else {
+        messageOne.textContent = data.location;
 
-          messageTwo.textContent =
-            "prognoza:" +
-            data.forecast.description +
-            ", temperatura:" +
-            data.forecast.temperature +
-            " presiune:" +
-            data.forecast.pressure;
-        }
-      });
-    }
-  );
+        messageTwo.textContent =
+          "prognoza:" +
+          data.forecast.description +
+          ", temperatura:" +
+          data.forecast.temperature +
+          " presiune:" +
+          data.forecast.pressure;
+      }
+    });
+  });
 });
